@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new("> 1.3.1") if s.respond_to? :required_rubygems_version=
   s.authors = ["Piotr Solnica"]
-  s.date = %q{2010-05-24}
+  s.date = %q{2010-08-17}
   s.default_executable = %q{console}
   s.email = %q{piotr.solnica@gmail.com}
   s.executables = ["console"]
@@ -31,14 +31,8 @@ Gem::Specification.new do |s|
      "lib/mongo_adapter/adapter.rb",
      "lib/mongo_adapter/aggregates.rb",
      "lib/mongo_adapter/conditions.rb",
-     "lib/mongo_adapter/embedded_model.rb",
-     "lib/mongo_adapter/embedded_resource.rb",
-     "lib/mongo_adapter/embedments/one_to_many.rb",
-     "lib/mongo_adapter/embedments/one_to_one.rb",
-     "lib/mongo_adapter/embedments/relationship.rb",
      "lib/mongo_adapter/migrations.rb",
      "lib/mongo_adapter/model.rb",
-     "lib/mongo_adapter/model/embedment.rb",
      "lib/mongo_adapter/modifier.rb",
      "lib/mongo_adapter/property/array.rb",
      "lib/mongo_adapter/property/db_ref.rb",
@@ -56,20 +50,14 @@ Gem::Specification.new do |s|
      "spec/legacy/adapter_shared_spec.rb",
      "spec/legacy/adapter_spec.rb",
      "spec/legacy/associations_spec.rb",
-     "spec/legacy/embedded_resource_spec.rb",
-     "spec/legacy/embedments_spec.rb",
      "spec/legacy/modifier_spec.rb",
      "spec/legacy/property_spec.rb",
      "spec/legacy/spec_helper.rb",
      "spec/legacy/sti_spec.rb",
      "spec/lib/cleanup_models.rb",
      "spec/lib/raw_connections.rb",
-     "spec/public/embedded_collection_spec.rb",
-     "spec/public/embedded_resource_spec.rb",
-     "spec/public/model/embedment_spec.rb",
      "spec/public/model_spec.rb",
      "spec/public/resource_spec.rb",
-     "spec/public/shared/model_embedments_spec.rb",
      "spec/public/shared/object_id_shared_spec.rb",
      "spec/public/types/df_ref_spec.rb",
      "spec/public/types/discriminator_spec.rb",
@@ -77,49 +65,36 @@ Gem::Specification.new do |s|
      "spec/public/types/embedded_hash_spec.rb",
      "spec/public/types/object_id_spec.rb",
      "spec/rcov.opts",
-     "spec/semipublic/embedded_model_spec.rb",
-     "spec/semipublic/model/embedment_spec.rb",
-     "spec/semipublic/resource_spec.rb",
      "spec/spec.opts",
      "spec/spec_helper.rb",
      "tasks/spec.rake",
      "tasks/yard.rake",
      "tasks/yardstick.rake"
   ]
-  s.has_rdoc = false
   s.homepage = %q{http://github.com/solnic/dm-mongo-adapter}
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.7}
   s.summary = %q{MongoDB DataMapper Adapter}
   s.test_files = [
-    "spec/semipublic/model/embedment_spec.rb",
-     "spec/semipublic/resource_spec.rb",
-     "spec/semipublic/embedded_model_spec.rb",
-     "spec/public/types/discriminator_spec.rb",
-     "spec/public/types/df_ref_spec.rb",
+    "spec/lib/raw_connections.rb",
+     "spec/lib/cleanup_models.rb",
+     "spec/spec_helper.rb",
+     "spec/legacy/sti_spec.rb",
+     "spec/legacy/adapter_shared_spec.rb",
+     "spec/legacy/spec_helper.rb",
+     "spec/legacy/associations_spec.rb",
+     "spec/legacy/adapter_spec.rb",
+     "spec/legacy/property_spec.rb",
+     "spec/legacy/modifier_spec.rb",
      "spec/public/types/embedded_hash_spec.rb",
-     "spec/public/types/object_id_spec.rb",
+     "spec/public/types/df_ref_spec.rb",
      "spec/public/types/embedded_array_spec.rb",
-     "spec/public/model/embedment_spec.rb",
+     "spec/public/types/object_id_spec.rb",
+     "spec/public/types/discriminator_spec.rb",
      "spec/public/resource_spec.rb",
      "spec/public/shared/object_id_shared_spec.rb",
-     "spec/public/shared/model_embedments_spec.rb",
-     "spec/public/embedded_resource_spec.rb",
-     "spec/public/embedded_collection_spec.rb",
-     "spec/public/model_spec.rb",
-     "spec/legacy/property_spec.rb",
-     "spec/legacy/associations_spec.rb",
-     "spec/legacy/modifier_spec.rb",
-     "spec/legacy/adapter_shared_spec.rb",
-     "spec/legacy/embedded_resource_spec.rb",
-     "spec/legacy/sti_spec.rb",
-     "spec/legacy/embedments_spec.rb",
-     "spec/legacy/adapter_spec.rb",
-     "spec/legacy/spec_helper.rb",
-     "spec/spec_helper.rb",
-     "spec/lib/cleanup_models.rb",
-     "spec/lib/raw_connections.rb"
+     "spec/public/model_spec.rb"
   ]
 
   if s.respond_to? :specification_version then
@@ -131,9 +106,9 @@ Gem::Specification.new do |s|
       s.add_runtime_dependency(%q<dm-core>, ["~> 1.0.0"])
       s.add_runtime_dependency(%q<dm-aggregates>, ["~> 1.0.0"])
       s.add_runtime_dependency(%q<dm-migrations>, ["~> 1.0.0"])
-      s.add_runtime_dependency(%q<mongo>, ["~> 0.20"])
-      s.add_runtime_dependency(%q<bson>, ["~> 0.20"])
-      s.add_runtime_dependency(%q<bson_ext>, ["~> 0.20"])
+      s.add_runtime_dependency(%q<mongo>, ["~> 1.0.7"])
+      s.add_runtime_dependency(%q<bson>, ["~> 1.0.0"])
+      s.add_runtime_dependency(%q<bson_ext>, ["~> 1.0.0"])
       s.add_development_dependency(%q<rspec>, [">= 1.3.0"])
       s.add_development_dependency(%q<yard>, [">= 0.5"])
       s.add_development_dependency(%q<yardstick>, [">= 0.1"])
@@ -142,9 +117,9 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<dm-core>, ["~> 1.0.0"])
       s.add_dependency(%q<dm-aggregates>, ["~> 1.0.0"])
       s.add_dependency(%q<dm-migrations>, ["~> 1.0.0"])
-      s.add_dependency(%q<mongo>, ["~> 0.20"])
-      s.add_dependency(%q<bson>, ["~> 0.20"])
-      s.add_dependency(%q<bson_ext>, ["~> 0.20"])
+      s.add_dependency(%q<mongo>, ["~> 1.0.7"])
+      s.add_dependency(%q<bson>, ["~> 1.0.0"])
+      s.add_dependency(%q<bson_ext>, ["~> 1.0.0"])
       s.add_dependency(%q<rspec>, [">= 1.3.0"])
       s.add_dependency(%q<yard>, [">= 0.5"])
       s.add_dependency(%q<yardstick>, [">= 0.1"])
@@ -154,9 +129,9 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<dm-core>, ["~> 1.0.0"])
     s.add_dependency(%q<dm-aggregates>, ["~> 1.0.0"])
     s.add_dependency(%q<dm-migrations>, ["~> 1.0.0"])
-    s.add_dependency(%q<mongo>, ["~> 0.20"])
-    s.add_dependency(%q<bson>, ["~> 0.20"])
-    s.add_dependency(%q<bson_ext>, ["~> 0.20"])
+    s.add_dependency(%q<mongo>, ["~> 1.0.7"])
+    s.add_dependency(%q<bson>, ["~> 1.0.0"])
+    s.add_dependency(%q<bson_ext>, ["~> 1.0.0"])
     s.add_dependency(%q<rspec>, [">= 1.3.0"])
     s.add_dependency(%q<yard>, [">= 0.5"])
     s.add_dependency(%q<yardstick>, [">= 0.1"])
