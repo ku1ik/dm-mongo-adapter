@@ -1,10 +1,6 @@
 module DataMapper
   module Mongo
     module Model
-      def self.extended(model)
-        model.extend Embedment
-      end
-
       # Defines a Property on the Resource
       #
       # Overrides the property method in dm-core so as to automatically map
@@ -33,36 +29,6 @@ module DataMapper
         end
 
         super(name, type, options)
-      end
-
-      # Loads an instance of this Model, taking into account IdentityMap
-      # lookup, inheritance columns(s) and Property typecasting. Also loads
-      # the embedments on the Resource.
-      #
-      # @param [Enumerable<Object>] records
-      #   An Array of Resource or Hashes to load a Resource with
-      # @param [DataMapper::Query] query
-      #   The query used to load the Resource
-      #
-      # @return [Resource]
-      #   The loaded Resource instance
-      #
-      # @overrides DataMapper::Model#load
-      #
-      # @api semipublic
-      def load(records, query)
-        resources = super
-
-        # Load embedded resources
-        resources.each_with_index do |resource, index|
-          resource.model.embedments.each do |name, relationship|
-            unless (targets = records[index][name.to_s]).blank?
-              relationship.set(resource, targets, true)
-            end
-          end
-        end
-
-        resources
       end
 
       private

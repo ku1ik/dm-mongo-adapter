@@ -1,5 +1,16 @@
 = DataMapper MongoDB Adapter
 
+== Status
+
+The adapter is going through a major re-work as DataMapper will soon support EmbeddedValue (see: http://wiki.github.com/datamapper/dm-core/roadmap)
+and the adapter will significantly benefit from that fact as there won't be a need to hack around DM's private API like
+it used to be. Apart from embedded docs support there's plenty of work that needs to be done around MongoDB's modifier
+operators (http://www.mongodb.org/display/DOCS/Updating). With these things done we can start thinking about releasing 1.0.
+
+Contributors are most welcome! In case of any questions you can find me on #datamapper IRC channel.
+
+solnic
+
 Useful links:
 
 * http://github.com/solnic/dm-mongo-adapter
@@ -10,9 +21,9 @@ Useful links:
 
 Ruby gems
 
-* dm-core ~> 0.10.2
-* dm-aggregates ~> 0.10.2
-* mongo ~> 0.18.3
+* dm-core ~> 1.0.0
+* dm-aggregates ~> 1.0.0
+* mongo ~> 1.0
 
 == Install
 
@@ -25,35 +36,13 @@ Ruby gems
     :database => 'my_mongo_db',
   )
 
-  # Define embedded resources
-  class Address
-    include DataMapper::Mongo::EmbeddedResource
-
-    property :street, String
-    property :city, String
-    property :state, String
-    property :postal_code, String
-  end
-
-  class Score
-    include DataMapper::Mongo::EmbeddedResource
-
-    property :grade, Float
-    property :course_id, DBRef
-
-    belongs_to :course
-  end
-
-  # Define top-level resources
+  # Define resources
   class Student
     include DataMapper::Mongo::Resource
 
     property :id, ObjectID
     property :name, String
     property :age, Integer
-
-    embeds 1, :address, :model => Address
-    embeds n, :scores
   end
 
   class Course
@@ -67,16 +56,8 @@ Ruby gems
   biology = Course.create(:name => "Biology")
   english = Course.create(:name => "English")
 
-  # Nested attributes
-  student = Student.create(:name => "John", :age => "26",
-    :address => { :street => "123 Main St.", :city => "New York", :state => "NY", :postal_code => "10014" },
-    :scores  => [ { :grade => 4.0, :course_id => biology.id }, { :grade => 3.0, :course_id => english.id } ])
-
   # Queries
   Student.all(:age.gte => 20, :name => /oh/, :limit => 20, :order => [:age.asc])
-
-  # Reaching into embedded objects
-  Student.all(:"address.state" => "NY")
 
   # Array and Hash as a property
   class Zoo

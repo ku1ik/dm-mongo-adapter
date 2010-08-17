@@ -20,9 +20,9 @@ begin
     gem.add_dependency 'dm-core',       '~> 1.0.0'
     gem.add_dependency 'dm-aggregates', '~> 1.0.0'
     gem.add_dependency 'dm-migrations', '~> 1.0.0'
-    gem.add_dependency 'mongo',         '~> 0.20'
-    gem.add_dependency 'bson',          '~> 0.20'
-    gem.add_dependency 'bson_ext',      '~> 0.20'
+    gem.add_dependency 'mongo',         '~> 1.0.0'
+    gem.add_dependency 'bson',          '~> 1.0.0'
+    gem.add_dependency 'bson_ext',      '~> 1.0.0'
     # Development deps
     gem.add_development_dependency 'rspec',     '>= 1.3.0'
     gem.add_development_dependency 'yard',      '>= 0.5'

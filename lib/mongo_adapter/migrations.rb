@@ -7,7 +7,7 @@ module DataMapper
       
       def repository_execute(method, repository_name)
         DataMapper::Model.descendants.each do |model|
-          model.send(method, repository_name || model.default_repository_name) unless model == DataMapper::Mongo::EmbeddedResource
+          model.send(method, repository_name || model.default_repository_name)
         end
       end
     end

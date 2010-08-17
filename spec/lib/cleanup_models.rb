@@ -19,7 +19,6 @@ module DataMapper::Mongo::Spec
           end
 
           DataMapper::Model.descendants.delete(model)
-          DataMapper::Mongo::EmbeddedModel.descendants.delete(model)
 
           Object.send(:remove_const, sym)
         end
